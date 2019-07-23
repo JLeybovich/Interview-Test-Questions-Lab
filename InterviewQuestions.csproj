@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Common\Node.cs" />
     <Compile Include="Assets\Scripts\Common\TraversalState.cs" />
     <Compile Include="Assets\Scripts\LinkedLists\FindFromLast.cs" />
+    <Compile Include="Assets\Scripts\LinkedLists\LinkedList.cs" />
     <Compile Include="Assets\Scripts\LinkedLists\LinkedListNode.cs" />
     <Compile Include="Assets\Scripts\LinkedLists\RemoveDups.cs" />
     <Compile Include="Assets\Scripts\MathAndLogic\DivideWithoutDivision.cs" />

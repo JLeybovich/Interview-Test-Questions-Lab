@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Tests\ArraysAndStrings\ZeroMatrixTests.cs" />
     <Compile Include="Assets\Scripts\Tests\Common\BitVectorTests.cs" />
     <Compile Include="Assets\Scripts\Tests\LinkedLists\FindFromLastTests.cs" />
+    <Compile Include="Assets\Scripts\Tests\LinkedLists\LinkedListTests.cs" />
     <Compile Include="Assets\Scripts\Tests\LinkedLists\RemoveDupsTests.cs" />
     <Compile Include="Assets\Scripts\Tests\MathAndLogic\DivideWithoutDivisionTests.cs" />
     <Compile Include="Assets\Scripts\Tests\TreesAndGraphs\MinimalBSTTests.cs" />
