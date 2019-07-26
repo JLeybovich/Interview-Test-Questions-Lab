@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\LinkedLists\RemoveDups.cs" />
     <Compile Include="Assets\Scripts\MathAndLogic\DivideWithoutDivision.cs" />
     <Compile Include="Assets\Scripts\TreesAndGraphs\CheckBalanced.cs" />
+    <Compile Include="Assets\Scripts\TreesAndGraphs\CheckBST.cs" />
     <Compile Include="Assets\Scripts\TreesAndGraphs\Graph.cs" />
     <Compile Include="Assets\Scripts\TreesAndGraphs\GraphNode.cs" />
     <Compile Include="Assets\Scripts\TreesAndGraphs\ListOfDepths.cs" />
