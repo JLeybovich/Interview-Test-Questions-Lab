@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace InterviewQuestions.HashTables
+namespace InterviewQuestions.HashTables.Tests
 {
     public class WordCloudTests
     {

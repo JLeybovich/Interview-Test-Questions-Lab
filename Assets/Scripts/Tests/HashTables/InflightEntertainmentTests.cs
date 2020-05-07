@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace InterviewQuestions.HashTables
+namespace InterviewQuestions.HashTables.Tests
 {
     public class InflightEntertainmentTests
     {
