@@ -8,6 +8,11 @@ namespace InterviewQuestions.TreesAndGraphs
     {
         public List<GraphNode<T>> Adjacent { get; set; }
 
+        public void AddAdjacent(params GraphNode<T>[] adjacent)
+        {
+            Adjacent.AddRange(adjacent);
+        }
+
         public GraphNode(T value = default, params GraphNode<T>[] adjacent)
             : base(value)
         {
