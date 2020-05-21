@@ -13,5 +13,10 @@ namespace InterviewQuestions.TreesAndGraphs
             Left = left;
             Right = right;
         }
+
+        public static implicit operator TreeNode<T>(T v)
+        {
+            return new TreeNode<T>(v);
+        }
     }
 }
