@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class MarkdownConverter
 {
-    private const int MinHeader = 1;
-    private const int MaxHeader = 6;
-
     public void MarkdownToHtml(
         string inputMarkdownFilePath,
         string outputMarkdownFilePath)
@@ -19,15 +16,61 @@ public class MarkdownConverter
     private string Convert(string input)
     {
         string converted = input;
-        converted = ConvertHeaders(ref converted);
+        converted = ConvertAutoEscape(ref converted, '&', "amp");
+        converted = ConvertAutoEscape(ref converted, '<', "lt");
         converted = ConvertFormat(ref converted, 2, "strong");
         converted = ConvertFormat(ref converted, 1, "em");
+        converted = ConvertParagraphs(ref converted);
+        converted = ConvertLists(ref converted, "ul", "[-+*]");
+        converted = ConvertLists(ref converted, "ol", @"\d+.");
+        converted = ConvertHeaders(ref converted);
         return converted;
     }
 
-    private string ConvertHeaders(ref string input)
+    private string ConvertAutoEscape(ref string input, char ch, string sub)
     {
-        for(int header = MaxHeader; header >= MinHeader; --header)
+        var pattern = ch == '&' ? @".*(\b&.[^;])" : ch.ToString();
+        var matches = Regex.Matches(input, pattern, RegexOptions.Multiline);
+
+        foreach (Match match in matches)
+        {
+            string converted = Regex.Replace(match.ToString(),
+                ch.ToString(),
+                @"&" + sub + ";");
+
+            input = input.Replace(match.ToString(), converted);
+        }
+
+        return input;
+    }
+
+    private string ConvertLists(ref string input, string listTag, string bulletPattern)
+    {
+        var pattern = @"(" + bulletPattern + @" .*$\n)+";
+        Debug.Log(pattern);
+        var matches = Regex.Matches(input, pattern, RegexOptions.Multiline);
+
+        foreach (Match match in matches)
+        {
+            pattern = "^" + bulletPattern + @"\s*";
+            string converted = Regex.Replace(match.ToString(), pattern,
+                x => "<li>",
+                RegexOptions.Multiline);
+            converted = Regex.Replace(converted, "\n", "</li>\n", RegexOptions.Multiline);
+
+            converted = "<" + listTag + ">\n" +
+                converted +
+                "</" + listTag + ">\n";
+
+            input = input.Replace(match.ToString(), converted);
+        }
+
+        return input;
+    }
+
+    private string ConvertHeaders(ref string input, int minHeader = 1, int maxHeader = 6)
+    {
+        for(int header = maxHeader; header >= minHeader; --header)
         {
             var pattern = @"^#{" + header + "}.*";
             var matches = Regex.Matches(input, pattern, RegexOptions.Multiline);
@@ -67,6 +110,14 @@ public class MarkdownConverter
             input = input.Replace(match.ToString(), converted);
         }
 
+        return input;
+    }
+
+    private string ConvertParagraphs(ref string input)
+    {
+        var pattern = @"^(?![#>\+\-*\d ])((?![#>\-*\d ]).+\n?)+";
+        input = Regex.Replace(input, pattern, x => "<p>" + x.ToString().TrimEnd('\n') + "</p>\n",
+            RegexOptions.Multiline);
         return input;
     }
 }
