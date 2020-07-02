@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Text.RegularExpressions;
-using UnityEngine;
 
 public class MarkdownConverter
 {
@@ -47,7 +46,6 @@ public class MarkdownConverter
     private string ConvertLists(ref string input, string listTag, string bulletPattern)
     {
         var pattern = @"(" + bulletPattern + @" .*$\n)+";
-        Debug.Log(pattern);
         var matches = Regex.Matches(input, pattern, RegexOptions.Multiline);
 
         foreach (Match match in matches)
